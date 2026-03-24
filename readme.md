@@ -1,5 +1,3 @@
-**简体中文** | [English](./readme_en.md)
-
 <h1 align="center"> 一体式国自然申报书聚合模版 </h1>
 <div align="center">
   <a href="https://www.latex-project.org/lppl/">
