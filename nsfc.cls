@@ -20,12 +20,6 @@
 \newlength{\nsfcrightmargin}
 
 
-% \setlength{\nsfctopmargin}{2.54cm}  % 默认用青基C的参数
-% \setlength{\nsfcbottommargin}{2.54cm}
-% \setlength{\nsfcleftmargin}{3.2cm}
-% \setlength{\nsfcrightmargin}{3.2cm}
-
-
 %% 用来判断该指定哪种公式字体
 \newboolean{iscmmmath}% 用作需要设置latex本身默认的Computer Modern Math
 \newboolean{istimesmath}% 用作需要设置公式符号全部为Times New Roman时
@@ -48,8 +42,6 @@
 \newcommand{\nsfcoutputname}{输出}
 \newcommand{\nsfccolon}{：}
 \newcommand{\tablecontinuedtag}{（续）}
-\newcommand{\nsfclofnumwidth}{1.4em}
-\newcommand{\nsfclotnumwidth}{1.4em}
 \newcommand{\nsfcenumerateouterlabel}{（\arabic*）}
 \newcommand{\nsfcenumerateinnerlabel}{\arabic*）}
 \newcommand{\nsfcenumerateouterlabelsep}{-0.2em}
@@ -256,7 +248,6 @@
 \RequirePackage{layouts}
 \RequirePackage{zhnumber}  % 将计数器显示成中文
 \RequirePackage{titlesec}  % 修改各级标题样式、目录等
-% \RequirePackage{afterpage}
 % 生成带编号的书签，并设置书签深度（bookmarksdepth不显示赋值则取tocdepth值），参考hyperref宏包文档
 \RequirePackage[
 	bookmarksnumbered=true,
@@ -287,13 +278,9 @@
 % \RequirePackage{centerlastline}  % 设计封面中的标题最后一行居中需要
 \RequirePackage{multirow}  % 表格合并多行单元格需要
 \RequirePackage{extarrows}  % 带文字的长等号与箭头需要
-%%%%%%
-% \let\Zbar\relax% 防止在下方载入newtxmath宏包时（与xunicode宏包冲突）报“Command `\Zbar' already defined.”，见：https://github.com/CTeX-org/ctex-kit/issues/454
-% \RequirePackage{newtxmath}  % 调整数学公式字体为times需要，但似乎公式中的数字字体不变，而且z看起来不像times，遂弃用
-%%%%%%
-% \RequirePackage{unicode-math}  % 也可调整公式字体，但仅能使用特定的Unicode数学字体，https://mirrors.ustc.edu.cn/CTAN/info/lshort/chinese/lshort-zh-cn.pdf。效果看起来偏粗，times的希腊字母有点丑，手写体很夸张，双线体也有点怪，遂弃用
 
-% mathspec宏包与ctex宏包和fontspec宏包有冲突，需要调整其加载fontspec的逻辑，https://tex.stackexchange.com/questions/713406/unknown-option-euzfmath-for-package-fontspec
+
+%%% mathspec宏包与ctex宏包和fontspec宏包有冲突，需要调整其加载fontspec的逻辑，https://tex.stackexchange.com/questions/713406/unknown-option-euzfmath-for-package-fontspec
 \ExplSyntaxOn
 \NewCommandCopy{\kernelRequirePackage}{\RequirePackage}
 \RenewDocumentCommand{\RequirePackage}{O{}mo}{
@@ -302,6 +289,7 @@
 	}
 }
 \ExplSyntaxOff
+
 \RequirePackage{mathspec}  % 设置公式字体为times new roman需要
 \RenewCommandCopy{\RequirePackage}{\kernelRequirePackage}
 
@@ -383,29 +371,6 @@
 	Path = ./font/,
 ]   % 正文中文等宽字体——楷体
 
-%% 定义ctex包默认字体之外的其他字体：
-% https://blog.csdn.net/ProgramChangesWorld/article/details/51429138
-% https://latex.lierhua.top/zh/docs/%E5%AD%97%E4%BD%93%E6%97%8F/
-\newCJKfontfamily\hwzs{HuaWenZhongSong}  % 为研究生封面添加需要的华文中宋字族
-\setCJKfamilyfont{hwzs}{STZHONGS}[
-	AutoFakeBold=2,
-	AutoFakeSlant=0.3,
-	Path = ./font/,
-] % 设置华文行楷字族使用的字体文件和字形等属性
-
-\newCJKfontfamily\hwxk{HuaWenXingKai}  % 为本科封面添加需要的华文行楷字族
-\setCJKfamilyfont{hwxk}{STXINGKA}[
-	AutoFakeBold=2,
-	AutoFakeSlant=0.3,
-	Path = ./font/,
-] % 设置华文行楷字族使用的字体文件和字形等属性
-
-% \newCJKfontfamily\kaiti{KaiTi}  % 为标题添加需要的楷体字族
-% \setCJKfamilyfont{kaiti}{SimKai}[
-% 	AutoFakeBold=2,
-% 	AutoFakeSlant=0.3,
-% 	Path = ./font/,
-% ] % 设置楷体字族使用的字体文件和字形等属性
 
 
 %%%%%% 判断是否设置公式字体为times new roman
@@ -435,8 +400,7 @@
 		\renewcommand{\boldsymbol}[1]{\oldboldsymbol{\mathit{#1}}}% mathspec宏包未定义bold字系，只能重定义\boldsymbol命令，曲线救国
 	}%
 
-% %% 基于unicode-math宏包
-% \setmathfont{XITS Math}
+
 
 %%%%%
 \xeCJKsetup{%
@@ -518,13 +482,6 @@
 }
 
 
-% \xeCJKsetwidth{、}{1.03em}
-% \xeCJKsetwidth{（}{1.1em}
-% \xeCJKsetwidth{）}{1em}
-% \xeCJKsetwidth{；}{0.7em}
-% \xeCJKsetwidth{，}{1em}
-% \xeCJKsetwidth{。}{0.7em}
-
 %% 调整公式段前段后，https://www.zhihu.com/question/379358826
 \abovedisplayskip=8bp plus 1bp minus 1bp
 \abovedisplayshortskip=4bp plus 1bp minus 1bp
@@ -541,14 +498,10 @@
 \setcitestyle{numbers,square}
 
 
-
-
-
 %%%%%% 关于Latex字号和行距与Word字号和行距的对应关系：
 % https://www.jianshu.com/p/3a833e484214
 \renewcommand{\normalsize}{\zihao{-4}\setlength{\baselineskip}{22bp}\selectfont}
 \renewcommand{\small}{\zihao{5}\setlength{\baselineskip}{15bp}\selectfont}
-
 
 
 %%%%%% 修改各级标题样式，参见titlesec宏包官方文档
@@ -658,10 +611,12 @@
 	{\renewcommand{\thesubfigure}{(\alph{subfigure})}}
 \renewcommand{\thetable}{\arabic{table}}
 \renewcommand{\theequation}{\arabic{equation}}
+
 %% 新增一个子公式编号使用的计数器
 \newcounter{subequation}
 \counterwithin{subequation}{equation}  % 子公式计数器随equation计数器重置
 \renewcommand{\thesubequation}{\alph{subequation}}
+
 %% 定义创建子公式编号的命令，
 \newcommand{\subeqtag}[1][]{%
 	\stepcounter{subequation}%
@@ -677,7 +632,7 @@
 \setlength{\floatsep}{9bp} % 相邻两个浮动体之间的垂直距离
 \setlength{\intextsep}{9bp}  % h模式浮动体前后间距
 \setlength{\textfloatsep}{15bp} % 页面中最后一个t模式的浮动体与文本的间距 或 页面中第一个b模式的浮动体与文本的间距。
-\renewcommand{\figurename}{\nsfcfigurename}% 如此才能修改图目录里的图标签前缀
+% \renewcommand{\figurename}{\nsfcfigurename}% 如此才能修改图目录里的图标签前缀
 \captionsetup[figure]{%
 	name={\nsfcfigurename},%
 	labelsep=space,%
@@ -688,27 +643,20 @@
 	belowskip=0bp%
 }
 
-%%% 重定义figure环境，在每次排版图片时都在“图目录”中间文件（.lof）中更新当前页码的实际宽度，以使图目录中的前导线完全延伸到页码，即前导线尾端可能参差不齐
-\renewenvironment{figure}[1][tbp]
-	{%
-		\@float{figure}[#1]%
-		\addtocontents{lof}{\protect\cftsetpnumwidth{\widthof{\thepage}-1bp}}% 调整目录中的页码排版宽度，并写入.lof文件，参考tocloft宏包
-	}%
-	{\end@float}
 
 \ifthenelse{\equal{\subfigformat}{simple}}
 	{
 		\captionsetup[subfloat]{%
 			labelformat=parens,
 			listofformat=subparens,
-			captionskip=-3bp,  % 去掉子图编号和子图间的垂直空间，这里-3bp是因为将\small设置为了20bp行距，而五号字大小是10.5bp，规范对子图题编号行距的要求是单倍行距，需要略作补偿。参见subfig宏包
+			captionskip=-3bp,  % 去掉子图编号和子图间的垂直空间，这里-3bp是因为将\small设置为了15bp行距，而五号字大小是10.5bp，规范对子图题编号行距的要求是单倍行距，需要略作补偿。参见subfig宏包
 			farskip=4bp,  % 调整纵向子图与上方子图题的间距
 		}
 	}{
 		\captionsetup[subfloat]{%
 			labelformat=simple,  % 配合对\thesubfigure的重新定义，避免子图题显示为((a))
 			listofformat=subsimple,  % 避免单独引用的子图编号显示为((a))，参考subfig宏包
-			captionskip=-3bp,  % 去掉子图编号和子图间的垂直空间，这里-3bp是因为将\small设置为了20bp行距，而五号字大小是10.5bp，规范对子图题编号行距的要求是单倍行距，需要略作补偿。参见subfig宏包
+			captionskip=-3bp,  % 去掉子图编号和子图间的垂直空间，这里-3bp是因为将\small设置为了15bp行距，而五号字大小是10.5bp，规范对子图题编号行距的要求是单倍行距，需要略作补偿。参见subfig宏包
 			farskip=4bp,  % 调整纵向子图与上方子图题的间距
 		}
 	}
@@ -736,7 +684,7 @@
 
 % 表中文字垂直居中且水平居中的方法，https://blog.csdn.net/happy_demo/article/details/105430091
 
-%%% 重定义table环境，使表格整体默认在页面中居中，并设置其内容的字体大小和行距；同时在每次排版表格时都在“表目录”中间文件（.lot）中更新当前页码的实际宽度，以使表目录中的前导线完全延伸到页码，即前导线尾端可能参差不齐
+%%% 重定义table环境，使表格整体默认在页面中居中，并设置其内容的字体大小和行距
 \renewenvironment{table}[1][tp]%
 	{%
 		\@float{table}[#1]%
@@ -745,14 +693,12 @@
 	 		{}%
 		\centering%
 		\zihao{5}\setlength\baselineskip{10.5bp}\selectfont%
-		% \addtocontents{lot}{\protect\cftsetpnumwidth{\widthof{\thepage}-1bp}}%
 	}%
 	{\end@float}%
 
 % 在\longtable的定义中插入一行命令，以调整跨页长表格内容的字体及行距。参考自longtable宏包
 \newcommand{\longtableprop}{%
 	\zihao{5}\setlength\baselineskip{10.5bp}\selectfont%
-	\addtocontents{lot}{\protect\cftsetpnumwidth{\widthof{\thepage}}}% 调整目录中的页码排版宽度，并写入.lot文件，参考tocloft宏包
 	%	\renewcommand{\arraystretch}{1.1}%
 }
 
@@ -831,17 +777,6 @@
 	\refstepcounter{tablenote}\label{#1}%
 	\thetablenote%
 }%
-
-
-
-%%%%%% 若要调整图、表计数器和其他计数器的关联关系，使用：
-%%%%%% https://blog.csdn.net/xovee/article/details/123524530
-% \counterwithin{<ctr>}{<within>}
-% \counterwithout{<ctr>}{<without>}
-
-
-
-
 
 
 \setcounter{secnumdepth}{5}
@@ -1064,8 +999,6 @@
 	leftmargin=3.8em,
 	labelsep=0.2em,
 }
-
-
 
 
 %%%%%% 定义上标引用命令
