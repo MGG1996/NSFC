@@ -1,4 +1,4 @@
-<h1 align="center"> 一体式国自然申报书聚合模版 </h1>
+<h1 align="center"> 国自然申报书一体式模版 </h1>
 <div align="center">
   <a href="https://www.latex-project.org/lppl/">
     <img src="https://img.shields.io/badge/license-LPPL-blue?style=for-the-badge&logo=latex&label=License&logoColor=white&color=008080" alt="License">
