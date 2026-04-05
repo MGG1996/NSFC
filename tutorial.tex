@@ -1,5 +1,5 @@
 % !TEX Program = xelatex
-\documentclass[QingNianC, vlined, timesmath]{nsfc}
+\documentclass[QingNianC, vlined, ]{nsfc}
 
 
 
@@ -426,10 +426,8 @@
 			\item \shad{cmmmath}\textcolor{DarkRed}{〔默认〕} / \shad{timesmathnogreek} / \shad{timesmath}：该选项用于选择渲染公式使用的字体。其中，\shad{cmmmath}即对应LaTeX默认使用的Computer Modern Math，也是此类选项的默认值；\shad{timesmathnogreek}指定使用Times New Roman来渲染公式中的英文字母和数字，但不影响希腊字母、手写体和双线体；\shad{timesmath}则继续将希腊字母也设置成Times New Roman（个人觉得有些违和），手写体和双线体仍保持原样。
 			
 			后两种选项均基于\href{https://mirrors.pku.edu.cn/ctan/macros/xetex/latex/mathspec/mathspec.pdf}{\ttfamily\color{DarkRed}\CJKunderline*[thickness=0.5bp, format=\color{DarkRed}]{mathspec}}宏包实现，经测试，只有它能做到真正意义上的Times New Roman。
-			
-			\textbf{P.s. 1：}需要注意，Times New Roman字体原不支持在公式中排版粗斜体，所以后两种选项将使\shad{$\backslash$boldsymbol\{\}}命令失效。为了解决该问题，模板（仅在后两种选项下）对这条命令进行了粗糙的重定义，使之能像原版那样生成粗斜体符号。但是，由于本人技术水平不足，重定义后的\shad{$\backslash$boldsymbol\{\}}命令需要遵循一条额外的使用规则：\textbf{其输入参数必须是最原始的数学符号}。比如你想排版\shad{$\backslash$boldsymbol\{$\backslash$hat\{$\backslash$alpha\}\}}（这在\shad{cmmmath}下是没有问题的），此时正确的写法应该是\shad{$\backslash$hat\{$\backslash$boldsymbol\{$\backslash$alpha\}\}}，\textbf{即将\shad{$\backslash$boldsymbol\{\}}置于嵌套的最内层}。否则，轻则无法渲染出预期的数学符号（在\shad{timesmath}选项下），重则直接报错（在\shad{timesmathnogreek}选项下）。
 
-			\textbf{P.s. 2：}因为\href{https://mirrors.pku.edu.cn/ctan/macros/xetex/latex/mathspec/mathspec.pdf}{\ttfamily\color{DarkRed}\CJKunderline*[thickness=0.5bp, format=\color{DarkRed}]{mathspec}}宏包本身的特性，使用Times New Roman作为公式字体需要用户付出更多精力。例如，你想排版\shad{\$f\^{}t\$}，那么你会发现\shad{f}和\shad{t}之间的间隔很小，两者发生了重叠，这时候需要你手动用\shad{"}插入空格，变成\shad{\$f\^{}\{"t\}\$}。因此，\shad{timesmathnogreek}和\shad{timesmath}选项均存在类似瑕疵，届时就需要仔细查阅\href{https://mirrors.pku.edu.cn/ctan/macros/xetex/latex/mathspec/mathspec.pdf}{\ttfamily\color{DarkRed}\CJKunderline*[thickness=0.5bp, format=\color{DarkRed}]{mathspec}}的宏包文档。
+			\textbf{P.s：}因为\href{https://mirrors.pku.edu.cn/ctan/macros/xetex/latex/mathspec/mathspec.pdf}{\ttfamily\color{DarkRed}\CJKunderline*[thickness=0.5bp, format=\color{DarkRed}]{mathspec}}宏包本身的特性，使用Times New Roman作为公式字体需要用户付出更多精力。例如，你想排版\shad{\$f\^{}t\$}，那么你会发现\shad{f}和\shad{t}之间的间隔很小，两者发生了重叠，这时候需要你手动用\shad{"}插入空格，变成\shad{\$f\^{}\{"t\}\$}。因此，\shad{timesmathnogreek}和\shad{timesmath}选项均存在类似瑕疵，届时就需要仔细查阅\href{https://mirrors.pku.edu.cn/ctan/macros/xetex/latex/mathspec/mathspec.pdf}{\ttfamily\color{DarkRed}\CJKunderline*[thickness=0.5bp, format=\color{DarkRed}]{mathspec}}的宏包文档。
 
 			\item 另外，\href{https://mirrors.sustech.edu.cn/CTAN/macros/latex/contrib/algorithm2e/doc/algorithm2e.pdf}{\ttfamily\color{DarkRed}\CJKunderline*[thickness=0.5bp, format=\color{DarkRed}]{algorithm2e}}宏包的\shad{vlined}和\shad{boxruled}选项也能通过文档类设置。
 		\end{itemize}
@@ -1323,11 +1321,19 @@
 	\end{align}
 	
 
-	$\boldsymbol{x}^2 + \mathrm{y}^2 + z^2 + \mathcal{B}^2 + \mathcal{M}^2 + \mathbb{I}^2 + v^2 + g^2 + m^2 + k^2$
+	$x^2 + \boldsymbol{x}^2 + y^2 + \mathrm{y}^2 + z^2 + \mathcal{B}^2 + \mathcal{M}^2 + \mathbb{I}^2 + v^2 + g^2 + m^2 + k^2$
 	
-	$\check{\boldsymbol{C}}^t_n + \hat{p}^j_{n, s} + \tilde{r}^t_{u,b} + \overline{i}^t_{x, y} + \acute{\alpha}^t_v + \acute{\boldsymbol{\alpha}}^t + \hat{\boldsymbol{\alpha}}^t + f^t_j + f^{"t}_j + l^t_j + l^{"t}_j$
+	$\check{\boldsymbol{C}}^t_n + \hat{p}^j_{n, s} + \tilde{r}^t_{u,b} + \overline{i}^t_{x, y} + \acute{\alpha}^t_v + \acute{\boldsymbol{\alpha}}^t + \hat{\boldsymbol{\alpha}}^t + f^t_j + f^{"t}_j + l^t_j + l^{"t}_j + \boldsymbol{\acute{\beta}}^t + \boldsymbol{\hat{\beta}}^t$
 
 	$\xlongequal{uvw}, \cdot, \cdots, \xLeftrightarrow{xyz}, \mathcal{N} \triangleq \left\{1, \dots, N\right\}, \times, \partial, \emptyset, \in, \subseteq, \leftarrow, \rightarrow, \leq, \geq$
+
+	$ \alpha \beta \gamma \delta \epsilon \zeta \eta \theta \iota \kappa \lambda \mu \nu \omicron \xi \pi \rho \sigma \tau \upsilon \phi \chi \psi \omega$
+
+	$ \boldsymbol{\alpha} \boldsymbol{\beta} \boldsymbol{\gamma} \boldsymbol{\delta} \boldsymbol{\epsilon} \boldsymbol{\zeta} \boldsymbol{\eta} \boldsymbol{\theta} \boldsymbol{\iota} \boldsymbol{\kappa} \boldsymbol{\lambda} \boldsymbol{\mu} \boldsymbol{\nu} \boldsymbol{\xi} \boldsymbol{\omicron} \boldsymbol{\pi} \boldsymbol{\rho} \boldsymbol{\sigma} \boldsymbol{\tau} \boldsymbol{\upsilon} \boldsymbol{\phi} \boldsymbol{\chi} \boldsymbol{\psi} \boldsymbol{\omega}$
+
+	$ \Alpha \Beta \Gamma \Delta \Epsilon \Zeta \Eta \Theta \Iota \Kappa \Lambda \Mu \Nu \Xi \Omicron \Pi \Rho \Sigma \Tau \Upsilon \Phi \Chi \Psi \Omega$
+	
+	$ \boldsymbol{\Alpha} \boldsymbol{\Beta} \boldsymbol{\Gamma} \boldsymbol{\Delta} \boldsymbol{\Epsilon} \boldsymbol{\Zeta} \boldsymbol{\Eta} \boldsymbol{\Theta} \boldsymbol{\Iota} \boldsymbol{\Kappa} \boldsymbol{\Lambda} \boldsymbol{\Mu} \boldsymbol{\Nu} \boldsymbol{\Xi} \boldsymbol{\Omicron} \boldsymbol{\Pi} \boldsymbol{\Rho} \boldsymbol{\Sigma} \boldsymbol{\Tau} \boldsymbol{\Upsilon} \boldsymbol{\Phi} \boldsymbol{\Chi} \boldsymbol{\Psi} \boldsymbol{\Omega}$
 	
 	有两点需要提醒：
 	\begin{itemize}

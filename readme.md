@@ -135,8 +135,6 @@
    
    3. `cmmmath`/`timesmathnogreek`/`timesmath`：该选项用于选择渲染公式使用的字体。其中，`cmmmath`即对应LaTeX默认使用的Computer Modern Math，也是此类选项的默认值；`timesmathnogreek`指定使用Times New Roman来渲染公式中的英文字母和数字，但不影响希腊字母、手写体和双线体；`timesmath`则继续将希腊字母也设置成Times New Roman（个人觉得希腊字符用这个字体有些违和），手写体和双线体仍保持原样。
      
-      :exclamation: 需要注意，Times New Roman字体原不支持在公式中排版粗斜体，所以后两种选项将使`\boldsymbol{}`命令失效。为了解决该问题，模板（仅在后两种选项下）对这条命令进行了粗糙的重定义，使之能像原版那样生成粗斜体符号。重定义后的`\boldsymbol{}`命令需要遵循一条额外的使用规则：**其输入参数必须是最原始的数学符号**。比如要排版`\boldsymbol{\hat{\alpha}}`（这在`cmmmath`下没有问题），正确的源码应该是`\hat{\boldsymbol{\alpha}}`，**即将`\boldsymbol{}`置于嵌套的最内层**。否则，模板轻则无法渲染出预期的数学符号（在`timesmath`选项下），重则直接报`! Internal error: bad native font flag in 'map_char_to_glyph'`错误（在`timesmathnogreek`选项下）。
-     
       :exclamation: 因为[mathspec](https://mirrors.pku.edu.cn/ctan/macros/xetex/latex/mathspec/mathspec.pdf)宏包的特性，使用Times New Roman做公式字体需要付出更多精力。例如，若直接排版`$f^t$`，那么`f`和`t`之间的间隔很小，将出现重叠。此时需要手动用`"`插入空格，即`$f^{"t}$`。`timesmathnogreek`和`timesmath`选项均存在类似瑕疵，届时请仔细查阅[mathspec](https://mirrors.pku.edu.cn/ctan/macros/xetex/latex/mathspec/mathspec.pdf)的宏包文档。
 
    4. 另外，[algorithm2e](https://mirrors.sustech.edu.cn/CTAN/macros/latex/contrib/algorithm2e/doc/algorithm2e.pdf)宏包的`vlined`和`boxruled`选项也可以在加载文档类时设置。

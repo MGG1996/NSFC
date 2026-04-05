@@ -386,6 +386,24 @@
 					BoldItalicFont=timesbi,
 					Path=font/
 				]{times}% 设置公式中的所有字体均为times new roman，包括希腊字母
+				%%% 重定义pmb命令的公式模式，绘制更多偏移，但减小单次偏移量，以避免重影
+				\def\pmb@#1#2{\setbox8\hbox{$\m@th#1{#2}$}%原始定义在amsmath宏包的amsbsy.sty中
+					\setboxz@h{$\m@th#1\mkern.15mu$}\pmbraise@\wdz@
+					\binrel@{#2}%
+					\dimen@-\wd8 %
+					\binrel@@{%
+						\mkern-.05mu\copy8 %
+						\kern\dimen@\mkern-.1mu\copy8 %
+						\kern\dimen@\mkern-.15mu\copy8 %
+						\kern\dimen@\raise\pmbraise@\copy8 %
+						\kern\dimen@\mkern-.04mu\raise.67\pmbraise@\copy8 %
+						\kern\dimen@\mkern-.08mu\raise.33\pmbraise@\copy8 %
+						\kern\dimen@\mkern.04mu\raise.67\pmbraise@\copy8 %
+						\kern\dimen@\mkern.08mu\raise.33\pmbraise@\copy8 %
+						\kern\dimen@\mkern.05mu\copy8 %
+						\kern\dimen@\mkern.1mu\copy8 %
+						\kern\dimen@\mkern.15mu\box8 }%
+				}
 			}%
 			{%
 				\setprimaryfont[
@@ -394,10 +412,27 @@
 					BoldItalicFont=timesbi,
 					Path=font/
 				]{times}% 仅设置公式中的普通字母和数字为times new roman，希腊字母则保持默认字体，它们用times new roman着实不好看，参考mathspec宏包文档
+				%%% 重定义pmb命令的公式模式，绘制更多偏移，但减小单次偏移量，以避免重影
+				\def\pmb@#1#2{\setbox8\hbox{$\m@th#1{#2}$}%原始定义在amsmath宏包的amsbsy.sty中
+					\setboxz@h{$\m@th#1\mkern.15mu$}\pmbraise@\wdz@
+					\binrel@{#2}%
+					\dimen@-\wd8 %
+					\binrel@@{%
+						\mkern-.07mu\copy8 %
+						\kern\dimen@\mkern-.14mu\copy8 %
+						\kern\dimen@\mkern-.21mu\copy8 %
+						\kern\dimen@\raise\pmbraise@\copy8 %
+						\kern\dimen@\mkern-.08mu\raise.67\pmbraise@\copy8 %
+						\kern\dimen@\mkern-.16mu\raise.33\pmbraise@\copy8 %
+						\kern\dimen@\mkern.08mu\raise.67\pmbraise@\copy8 %
+						\kern\dimen@\mkern.16mu\raise.33\pmbraise@\copy8 %
+						\kern\dimen@\mkern.07mu\copy8 %
+						\kern\dimen@\mkern.14mu\copy8 %
+						\kern\dimen@\mkern.21mu\box8 }%
+				}
 			}%
 		\setminwhitespace[3000]% 调整mathspec宏包提供的“"”插入的空格大小，用于解决部分数学字符间距离过小的问题，比如：$f^t$。参考mathspec宏包
-		\let\oldboldsymbol\boldsymbol
-		\renewcommand{\boldsymbol}[1]{\oldboldsymbol{\mathit{#1}}}% mathspec宏包未定义bold字系，只能重定义\boldsymbol命令，曲线救国
+		\renewcommand{\boldsymbol}[1]{\pmb{#1}}% mathspec宏包未定义bold字系，只能重定义\boldsymbol命令，曲线救国
 	}%
 
 
