@@ -60,21 +60,33 @@
 \newcommand{\nsfclightrulewidth}{0.75bp}  % 用于设置\midrule默认线粗，本科0.5bp，研究生0.75bp
 
 
-\newcommand{\SetNSFCYear}{%
-	\setcounter{NSFCYear}{1}%
-	\ifthenelse{\the\month > 3 \or {\equal{\the\month}{3} \and \the\day > 20}}{%
-		\addtocounter{NSFCYear}{\the\year}%
+\newcommand{\SetNSFCYear}[1][]{%
+	\ifthenelse{\equal{#1}{}}{%
+		\setcounter{NSFCYear}{1}%
+		\ifnum \the\month > 3%
+			\addtocounter{NSFCYear}{\the\year}%
+		\else%
+			\ifnum \the\month = 3%
+				\ifnum \the\day > 20%
+					\addtocounter{NSFCYear}{\the\year}%
+				\else%
+					\setcounter{NSFCYear}{\the\year}%
+				\fi%
+			\else%
+				\setcounter{NSFCYear}{\the\year}%
+			\fi
+		\fi
 	}{%
-		\setcounter{NSFCYear}{\the\year}%
+		\setcounter{NSFCYear}{#1}%
 	}%
-}
+}%
 
 
 %%%%%%----------------- declaration of options -----------------
 
 \DeclareOption{QingNianA}{%
-	\renewcommand{\nsfctitle}{%
-		\SetNSFCYear%
+	\renewcommand{\nsfctitle}[1][]{%
+		\SetNSFCYear[#1]%
 		\chapter*{报告正文（\arabic{NSFCYear}版）}%
 		\stepcounter{chapter}%
 		{\ttfamily\zihao{4}\setlength{\baselineskip}{22bp}\selectfont%
@@ -88,8 +100,8 @@
 }%
 
 \DeclareOption{QingNianB}{%
-	\renewcommand{\nsfctitle}{%
-		\SetNSFCYear%
+	\renewcommand{\nsfctitle}[1][]{%
+		\SetNSFCYear[#1]%
 		\chapter*{报告正文（\arabic{NSFCYear}版）}%
 		\stepcounter{chapter}%
 		{\ttfamily\zihao{4}\setlength{\baselineskip}{22bp}\selectfont%
@@ -104,8 +116,8 @@
 
 
 \DeclareOption{QingNianC}{%
-	\renewcommand{\nsfctitle}{%
-		\SetNSFCYear%
+	\renewcommand{\nsfctitle}[1][]{%
+		\SetNSFCYear[#1]%
 		\chapter*{报告正文（\arabic{NSFCYear}版）}%
 		\stepcounter{chapter}%
 		{\ttfamily\zihao{4}\setlength{\baselineskip}{22bp}\selectfont%
@@ -119,8 +131,8 @@
 }%
 
 \DeclareOption{MianShang}{%
-	\renewcommand{\nsfctitle}{%
-		\SetNSFCYear%
+	\renewcommand{\nsfctitle}[1][]{%
+		\SetNSFCYear[#1]%
 		\chapter*{报告正文（\arabic{NSFCYear}版）}%
 		\stepcounter{chapter}%
 		{\ttfamily\zihao{4}\setlength{\baselineskip}{22bp}\selectfont%
@@ -135,8 +147,8 @@
 }%
 
 \DeclareOption{ZhongDian}{%
-	\renewcommand{\nsfctitle}{%
-		\SetNSFCYear%
+	\renewcommand{\nsfctitle}[1][]{%
+		\SetNSFCYear[#1]%
 		\chapter*{报告正文（\arabic{NSFCYear}版）}%
 		\stepcounter{chapter}%
 		{\ttfamily\zihao{4}\setlength{\baselineskip}{22bp}\selectfont%
@@ -151,8 +163,8 @@
 }%
 
 \DeclareOption{ZhongDa}{%
-	\renewcommand{\nsfctitle}{%
-		\SetNSFCYear%
+	\renewcommand{\nsfctitle}[1][]{%
+		\SetNSFCYear[#1]%
 		\chapter*{报告正文（\arabic{NSFCYear}版）}%
 		\stepcounter{chapter}%
 		{\ttfamily\zihao{4}\setlength{\baselineskip}{22bp}\selectfont%
@@ -166,8 +178,8 @@
 }%
 
 \DeclareOption{ZhongDaKeTi}{%
-	\renewcommand{\nsfctitle}{%
-		\SetNSFCYear%
+	\renewcommand{\nsfctitle}[1][]{%
+		\SetNSFCYear[#1]%
 		\chapter*{报告正文（\arabic{NSFCYear}版）}%
 		\stepcounter{chapter}%
 		{\ttfamily\zihao{4}\setlength{\baselineskip}{22bp}\selectfont%
@@ -181,8 +193,8 @@
 }%
 
 \DeclareOption{ZhongDaJiHua}{%
-	\renewcommand{\nsfctitle}{%
-		\SetNSFCYear%
+	\renewcommand{\nsfctitle}[1][]{%
+		\SetNSFCYear[#1]%
 		\chapter*{报告正文（\arabic{NSFCYear}版）}%
 		\stepcounter{chapter}%
 		{\ttfamily\zihao{4}\setlength{\baselineskip}{22bp}\selectfont%
