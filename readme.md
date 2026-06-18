@@ -149,6 +149,7 @@
    3. `cmmmath`/`timesmathnogreek`/`timesmath`：该选项用于选择渲染公式使用的字体。其中，`cmmmath`即对应LaTeX默认使用的Computer Modern Math，也是此类选项的默认值；`timesmathnogreek`指定使用Times New Roman来渲染公式中的英文字母和数字，但不影响希腊字母、手写体和双线体；`timesmath`则继续将希腊字母也设置成Times New Roman（个人觉得希腊字符用这个字体有些违和），手写体和双线体仍保持原样。
      
       > [!CAUTION]
+      >
       > 因为[mathspec](https://mirrors.pku.edu.cn/ctan/macros/xetex/latex/mathspec/mathspec.pdf)宏包的特性，使用Times New Roman做公式字体需要付出更多精力。例如，若直接排版`$f^t$`，那么`f`和`t`之间的间隔很小，将出现重叠。此时需要手动用`"`插入空格，即`$f^{"t}$`。
       >
       > `timesmathnogreek`和`timesmath`选项均存在类似瑕疵，届时请仔细查阅[mathspec](https://mirrors.pku.edu.cn/ctan/macros/xetex/latex/mathspec/mathspec.pdf)的宏包文档。

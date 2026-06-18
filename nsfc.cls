@@ -74,8 +74,8 @@
 				\fi%
 			\else%
 				\setcounter{NSFCYear}{\the\year}%
-			\fi
-		\fi
+			\fi%
+		\fi%
 	}{%
 		\setcounter{NSFCYear}{#1}%
 	}%
